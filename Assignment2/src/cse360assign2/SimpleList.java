@@ -2,18 +2,19 @@ package cse360assign2;
 /**
  * Code written by Riley Tuoti
  * Class ID # 231
- * Assignment # 1
+ * Assignment # 2
  *
- * This class provides 6 simple methods to do stuff to our class variables list, which is an array of integers 
+ * This class provides 10 simple methods to do stuff to our class variables list, which is an array of integers 
  * and count which is an integer of how many ints we have in our array list. SimpleList returns an empty array of size 10.
  * add adds its parameter to the front of the array, pushing back any numbers already in the array.
- * remove removes the paramter from the array list.
+ * remove removes the parameter from the array list.
  * count returns the class variable count. toString returns a string of all the numbers in our array separated by commas.
  * search returns the index of the first parameter found.
  * getAtIndex returns the node at index from parameter, used for testing.
+ * 4 new methods are added per assignment2 instruction. Very simple additions.
  *
  * @author Riley Tuoti
- * @version 1.0
+ * @version 2.0
  */
 
 
@@ -83,7 +84,7 @@ public class SimpleList {
 	
 	public void remove(int numRemove) {
 		
-		if ((size/4) >= (size - count)) {
+		if ((size/4) >= (size - count) && size > 1) {
 			size = size - (size/4); //decrease size by 25%
 			
 			int[] newList = new int[size]; //size is now decreased by 25%
@@ -163,6 +164,76 @@ public class SimpleList {
 	
 	public int getAtIndex(int indexDesired) {
 		return list[indexDesired];
+	}
+	
+	/**
+	 * This method appends the parameter to the end of the array instead of the front.
+	 * If the list is full then increase the size of the array by 50% to make room.
+	 * @param numAdd This parameter is the new integer we are adding to the array.
+	 * @return none.
+	 */
+	
+	public void append(int numAdd) {
+		if (count < 1) {
+			list[count] = numAdd;
+			count++;
+		}
+		else if (count == size) { //else if at max capacity
+			size = size + (size / 2);
+			int[] newList = new int[size]; //size is now increased by 50%
+			
+			for (int newListIterator = 0; newListIterator < count; newListIterator++) { //copy the array over
+				newList[newListIterator] = list[newListIterator];
+			}
+			
+			list = newList;
+		
+			list[count] = numAdd;
+			
+			count++;
+		}
+		else {
+			
+			list[count] = numAdd;
+			
+			count++;
+		}
+	}
+	
+	/**
+	 * This method returns the first element in the list. If the list is empty return -1.
+	 * @param none.
+	 * @return int	Returns the first element in the list or -1 if the list is empty.
+	 */
+	
+	public int first() {
+		if (count != 0) //if the list is NOT empty
+			return list[0];
+		else 
+			return -1;
+	}
+	
+	/**
+	 * This method returns the last element in the list. If the list is empty return -1.
+	 * @param none.
+	 * @return int	Returns the last element in the list or -1 if the list is empty.
+	 */
+	
+	public int last() {
+		if (count != 0) //if the list is NOT empty
+			return list[count - 1];
+		else 
+			return -1;
+	}
+	
+	/**
+	 * This method returns the number of possible locations in the list.
+	 * @param none.
+	 * @return int	Returns the number of possible locations in the list.
+	 */
+	
+	public int size() {
+		return size;
 	}
 	
 }
